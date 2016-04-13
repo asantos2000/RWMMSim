@@ -28,7 +28,8 @@ import WSNnodelist
 import random
 import math
 import os
-import Numeric
+#import Numeric
+import numpy
 import genConfFile
 
 # global variables --------------
@@ -323,8 +324,8 @@ def main():
     DIST_RES = maxspeed * resolution
 
     # setup arrays for keeping track of connectivity
-    rangelist_now = Numeric.zeros([noofnodes, noofnodes], Numeric.Int)
-    rangelist_pre = Numeric.zeros([noofnodes, noofnodes], Numeric.Int)
+    rangelist_now = numpy.zeros([noofnodes, noofnodes], numpy.int32)
+    rangelist_pre = numpy.zeros([noofnodes, noofnodes], numpy.int32)
     logst = ""              # string used for saving connection logs
     rangestr = ""           # keep all rangelogs in this string, to be printed/ andor written to file later
     timenow = (globalticks * resolution) - disregardtime

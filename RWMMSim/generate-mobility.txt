@@ -49,9 +49,9 @@
 # Maximum pause time [s]
 10
 # Maximum x-coordinate [m]
-175
+300
 # Maximum y-coordinate [m]
-150
+300
 # Minimum speed [m/s]
 1
 # Maximum speed [m/s]
@@ -63,4 +63,4 @@
 # Radio Interference range [m] (dist to where interference occurs)
 75
 # Radio reception range [m] (dist to where radio reception always succeeds)
-50
+100

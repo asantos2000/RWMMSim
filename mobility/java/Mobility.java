@@ -39,16 +39,23 @@ import javax.swing.JScrollPane;
 import org.apache.log4j.Logger;
 import org.jdom.Element;
 
-import se.sics.cooja.ClassDescription;
-import se.sics.cooja.GUI;
-import se.sics.cooja.Mote;
-import se.sics.cooja.PluginType;
-import se.sics.cooja.Simulation;
-import se.sics.cooja.TimeEvent;
-import se.sics.cooja.VisPlugin;
-import se.sics.cooja.dialogs.MessageList;
-import se.sics.cooja.interfaces.Position;
-import se.sics.cooja.util.StringUtils;
+import org.contikios.cooja.ClassDescription;
+import org.contikios.cooja.Cooja;
+import org.contikios.cooja.Cooja.RunnableInEDT;
+import org.contikios.cooja.Mote;
+import org.contikios.cooja.MotePlugin;
+import org.contikios.cooja.PluginType;
+import org.contikios.cooja.Simulation;
+import org.contikios.cooja.SupportedArguments;
+import org.contikios.cooja.TimeEvent;
+import org.contikios.cooja.VisPlugin;
+import org.contikios.cooja.dialogs.CompileContiki;
+import org.contikios.cooja.dialogs.MessageList;
+import org.contikios.cooja.interfaces.IPAddress;
+import org.contikios.cooja.interfaces.Position;
+import org.contikios.cooja.interfaces.SerialPort;
+import org.contikios.cooja.util.StringUtils;
+
 
 @ClassDescription("Mobility")
 @PluginType(PluginType.SIM_PLUGIN)
@@ -69,7 +76,7 @@ public class Mobility extends VisPlugin {
 
   private MessageList log = new MessageList();
 
-  public Mobility(Simulation simulation, final GUI gui) {
+  public Mobility(Simulation simulation, final Cooja gui) {
     super("Mobility", gui, false);
     this.simulation = simulation;
 
@@ -92,13 +99,13 @@ public class Mobility extends VisPlugin {
     }
 
     JFileChooser fileChooser = new JFileChooser();
-    File suggest = new File(GUI.getExternalToolsSetting("MOBILITY_LAST", "positions.dat"));
+    File suggest = new File(Cooja.getExternalToolsSetting("MOBILITY_LAST", "positions.dat"));
     fileChooser.setSelectedFile(suggest);
     fileChooser.setDialogTitle("Select positions file");
-    int reply = fileChooser.showOpenDialog(GUI.getTopParentContainer());
+    int reply = fileChooser.showOpenDialog(Cooja.getTopParentContainer());
     if (reply == JFileChooser.APPROVE_OPTION) {
       filePositions = fileChooser.getSelectedFile();
-      GUI.setExternalToolsSetting("MOBILITY_LAST", filePositions.getAbsolutePath());
+      Cooja.setExternalToolsSetting("MOBILITY_LAST", filePositions.getAbsolutePath());
     }
     if (filePositions == null) {
       throw new RuntimeException("No positions file");
@@ -214,7 +221,7 @@ public class Mobility extends VisPlugin {
 
     if (filePositions != null) {
       element = new Element("positions");
-      File file = simulation.getGUI().createPortablePath(filePositions);
+      File file = simulation.getCooja().createPortablePath(filePositions);
       element.setText(file.getPath().replaceAll("\\\\", "/"));
       element.setAttribute("EXPORT", "copy");
       config.add(element);
@@ -228,7 +235,7 @@ public class Mobility extends VisPlugin {
       String name = element.getName();
 
       if (name.equals("positions")) {
-        filePositions = simulation.getGUI().restorePortablePath(new File(element.getText()));
+        filePositions = simulation.getCooja().restorePortablePath(new File(element.getText()));
         loadPositions();
       }
     }
