@@ -6,7 +6,7 @@ RWMMSim
 > Code updated for run on Mac OS X 10.11.4 and Contiki 3.0
 
 ## Roadmap
-* Change the Contiki's mobility app to read Bonnmotion mobility scenarios files natively
+* Change the Contiki's mobility app to read Bonnmotion mobility scenarios files natively.
 
 ## Notes
 Script generate-mobility.py depend on python NumPy module. To install it on Mac, try
