@@ -15,6 +15,15 @@ Script generate-mobility.py depend on python NumPy module. To install it on Mac,
 $ sudo port install NumPy
 ``` 
 
+## References
+[1] [A Mobility Scenario Generation and Analysis Tool](http://sys.cs.uos.de/bonnmotion/doc/README.pdf)
+[2] [BonnMotion Home](https://sys.cs.uos.de/bonnmotion/index.shtml)
+[3] [Utilizando O BonnMotion, Um Gerador De Cenários De Mobilidade](http://www.decom.ufop.br/imobilis/utilizando-o-bonnmotion-um-gerador-de-cenarios-de-mobilidade/)
+[4] [Simulating Wireless and Mobile Networks in OMNeT++ The MiXiM Vision](http://www.tevp.net/papers/mixim.pdf)
+[5] [Mobility of Nodes in Cooja](http://anrg.usc.edu/contiki/index.php/Mobility_of_Nodes_in_Cooja)
+[6] [NumPy v1.11.dev0] (https://docs.scipy.org/doc/numpy-dev/user/quickstart.html)
+[7] [CONET Simulation Platform] (http://www.cooperating-objects.eu/testbed-simulation/simulation-platform/)
+
 # Original text
 
 * RWMMSim is a Random Waypoint Mobility Model position data generator for use with
